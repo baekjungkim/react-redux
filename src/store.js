@@ -3,14 +3,14 @@ import { createStore } from "redux";
 const ADD = "ADD";
 const REMOVE = "REMOVE";
 
-export const addToDo = (text) => {
+const addToDo = (text) => {
   return {
     type: ADD,
     text,
   };
 };
 
-export const removeToDo = (id) => {
+const removeToDo = (id) => {
   return {
     type: REMOVE,
     id,
@@ -22,12 +22,19 @@ const reducer = (state = [], action) => {
     case ADD:
       return [{ text: action.text, id: Date.now() }, ...state];
     case REMOVE:
-      return state.filter((toDo) => toDo !== action.id);
+      return state.filter((toDo) => {
+        return toDo.id !== action.id;
+      });
     default:
       return state;
   }
 };
 
 const store = createStore(reducer);
+
+export const actionCreators = {
+  addToDo,
+  removeToDo,
+};
 
 export default store;

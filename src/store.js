@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import { createAction, createReducer } from "@reduxjs/toolkit";
+import { createAction, createReducer, configureStore } from "@reduxjs/toolkit";
 
 // const ADD = "ADD";
 // const REMOVE = "REMOVE";
@@ -44,6 +44,8 @@ import { createAction, createReducer } from "@reduxjs/toolkit";
 //   }
 // };
 
+// const store = createStore(reducer);
+
 const addToDo = createAction("ADD");
 const removeToDo = createAction("REMOVE");
 
@@ -57,7 +59,9 @@ const reducer = createReducer([], {
     state.filter((toDo) => toDo.id !== action.payload), // new state : return
 });
 
-const store = createStore(reducer);
+// Chrome Extension : Redux Developer tools
+// https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related?hl=ko
+const store = configureStore({ reducer });
 
 export const actionCreators = {
   addToDo,
